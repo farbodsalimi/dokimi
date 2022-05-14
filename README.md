@@ -1,6 +1,6 @@
 # dokimi
 
-Dokimi ia Go testing framework.
+Dokimi is a Go testing framework.
 
 **Table of Contents**
 

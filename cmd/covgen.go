@@ -14,8 +14,6 @@ var (
 )
 
 func init() {
-	rootCmd.AddCommand(covgenCmd)
-
 	covgenCmd.PersistentFlags().StringVarP(&reporter, "reporter", "r", "", "Reporter name e.g. istanbul, lcov, ...")
 	covgenCmd.PersistentFlags().StringVarP(&in, "in", "i", "", "Path to input file")
 	covgenCmd.PersistentFlags().StringVarP(&out, "out", "o", "", "Path to output file")

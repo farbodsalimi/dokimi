@@ -10,15 +10,14 @@ import (
 var (
 	rootCmd = &cobra.Command{
 		Use:   "dokimi",
-		Short: "Dokimi ia Go testing framework.",
-		Long:  `Dokimi ia Go testing framework.`,
-		Run: func(cmd *cobra.Command, args []string) {
-			// Do Stuff Here
-		},
+		Short: "Dokimi is a Go testing framework.",
+		Long:  `Dokimi is a Go testing framework.`,
 	}
 )
 
 func init() {
+	rootCmd.CompletionOptions.DisableDefaultCmd = true
+
 	rootCmd.AddCommand(covgenCmd)
 }
 

@@ -9,6 +9,7 @@ import (
 	"strings"
 )
 
+// ref: https://github.com/golang/go/blob/dev.boringcrypto.go1.8/src/cmd/cover/profile.go
 func ParseProfiles(fileName string) ([]*Profile, error) {
 	pf, err := os.Open(fileName)
 	if err != nil {
