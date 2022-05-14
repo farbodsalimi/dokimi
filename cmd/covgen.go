@@ -23,7 +23,7 @@ func init() {
 
 var covgenCmd = &cobra.Command{
 	Use:   "covgen",
-	Short: "Generage coverage files in diffrent formats.",
+	Short: "Generates coverage files in different formats.",
 	Run: func(cmd *cobra.Command, args []string) {
 		reporter := cmd.PersistentFlags().Lookup("reporter").Value
 		in := cmd.PersistentFlags().Lookup("in").Value
