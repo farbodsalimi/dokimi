@@ -7,8 +7,10 @@ Dokimi is a Go testing framework.
 - [dokimi](#dokimi)
   - [Installation](#installation)
   - [Commands](#commands)
-    - [covgen](#covgen)
+    - [show](#show)
       - [Generate Istanbul coverage file](#generate-istanbul-coverage-file)
+    - [covgen](#covgen)
+      - [Generate Istanbul coverage file](#generate-istanbul-coverage-file-1)
 
 ## Installation
 
@@ -17,6 +19,24 @@ go install github.com/farbodsalimi/dokimi@latest
 ```
 
 ## Commands
+
+### show
+
+Shows coverage files in different formats.
+
+#### Generate Istanbul coverage file
+
+1. Go inside your project directory and run your tests:
+
+   ```bash
+   go test -v -coverprofile=coverage.out ./...
+   ```
+
+2. Show your coverage in Istanbul UI:
+
+   ```bash
+   dokimi show --reporter=istanbul --in=coverage.out
+   ```
 
 ### covgen
 
