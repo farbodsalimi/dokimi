@@ -4,19 +4,12 @@ import (
 	"errors"
 	"os"
 
+	"github.com/farbodsalimi/dokimi/internal/configs"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
-
-	"github.com/farbodsalimi/dokimi/internal/configs"
 )
 
 var (
-	// Persistent Flags
-	reporter string
-	in       string
-	out      string
-
 	// Root Command
 	rootCmd = &cobra.Command{
 		Use:   "dokimi",
@@ -30,16 +23,8 @@ func init() {
 
 	rootCmd.CompletionOptions.DisableDefaultCmd = true
 
-	rootCmd.PersistentFlags().StringVarP(&reporter, "reporter", "r", "", "Reporter name e.g. istanbul, lcov, ...")
-	rootCmd.PersistentFlags().StringVarP(&in, "in", "i", "", "Path to input file")
-	rootCmd.PersistentFlags().StringVarP(&out, "out", "o", "", "Path to output file")
-
-	viper.BindPFlag("reporter", rootCmd.PersistentFlags().Lookup("reporter"))
-	viper.BindPFlag("in", rootCmd.PersistentFlags().Lookup("in"))
-	viper.BindPFlag("out", rootCmd.PersistentFlags().Lookup("out"))
-
-	rootCmd.AddCommand(covgenCmd)
-	rootCmd.AddCommand(showCmd)
+	rootCmd.AddCommand(reportCmd)
+	rootCmd.AddCommand(checkCoverageCmd)
 }
 
 func initConfig() {
