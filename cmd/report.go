@@ -1,17 +1,19 @@
 package cmd
 
 import (
-	"github.com/farbodsalimi/dokimi/internal/reporters"
+	"strconv"
+
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"strconv"
+
+	"github.com/farbodsalimi/dokimi/internal/reporters"
 )
 
 func init() {
 	reportCmd.Flags().BoolVar(&show, "show", false, "Shows written reports")
 	reportCmd.Flags().StringVarP(&reporter, "reporter", "r", "", "Reporter name e.g. istanbul, lcov, ...")
-	reportCmd.Flags().StringVarP(&rInput, "input", "i", "", "Path to rInput file")
-	reportCmd.Flags().StringVarP(&rOutput, "output", "o", "", "Path to rOutput file")
+	reportCmd.Flags().StringVarP(&rInput, "input", "i", "", "Path to input file")
+	reportCmd.Flags().StringVarP(&rOutput, "output", "o", "", "Path to output file")
 	reportCmd.MarkFlagRequired("reporter")
 	reportCmd.MarkFlagRequired("rInput")
 }

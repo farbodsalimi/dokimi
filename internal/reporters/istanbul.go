@@ -1,17 +1,18 @@
 package reporters
 
 import (
-	"github.com/farbodsalimi/dokimi/internal/configs"
-	"github.com/olekukonko/tablewriter"
-	log "github.com/sirupsen/logrus"
-	"os/exec"
-
 	"encoding/json"
 	"io/ioutil"
 	"os"
+	"os/exec"
 	"path"
 	"strconv"
 	"strings"
+
+	"github.com/olekukonko/tablewriter"
+	log "github.com/sirupsen/logrus"
+
+	"github.com/farbodsalimi/dokimi/internal/configs"
 )
 
 type IstanbulStatementStartEnd struct {

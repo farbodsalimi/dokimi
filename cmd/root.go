@@ -4,9 +4,10 @@ import (
 	"errors"
 	"os"
 
-	"github.com/farbodsalimi/dokimi/internal/configs"
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+
+	"github.com/farbodsalimi/dokimi/internal/configs"
 )
 
 var (
