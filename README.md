@@ -7,10 +7,9 @@ Dokimi is a Go testing framework.
 - [dokimi](#dokimi)
   - [Installation](#installation)
   - [Commands](#commands)
-    - [show](#show)
-      - [Generate Istanbul coverage file](#generate-istanbul-coverage-file)
-    - [covgen](#covgen)
-      - [Generate Istanbul coverage file](#generate-istanbul-coverage-file-1)
+    - [report](#report)
+      - [Write Istanbul json reports and display them](#write-istanbul-json-reports-and-display-them)
+      - [Only write Istanbul json reports](#only-write-istanbul-json-reports)
 
 ## Installation
 
@@ -20,11 +19,21 @@ go install github.com/farbodsalimi/dokimi@latest
 
 ## Commands
 
-### show
+### report
 
-Shows coverage files in different formats.
+```
+Usage:
+  dokimi report [flags]
 
-#### Generate Istanbul coverage file
+Flags:
+  -h, --help              help for report
+  -i, --input string      Path to input file
+  -o, --output string     Path to output file
+  -r, --reporter string   Reporter name e.g. istanbul, lcov, ...
+      --show              Shows written reports
+```
+
+#### Write Istanbul json reports and display them
 
 1. Go inside your project directory and run your tests:
 
@@ -35,14 +44,10 @@ Shows coverage files in different formats.
 2. Show your coverage in Istanbul UI:
 
    ```bash
-   dokimi show --reporter=istanbul --in=coverage.out
+   dokimi report --input=coverage.out --output=coverage.json --reporter=istanbul --show
    ```
 
-### covgen
-
-Generates coverage files in different formats.
-
-#### Generate Istanbul coverage file
+#### Only write Istanbul json reports
 
 1. Go inside your project directory and run your tests:
 
@@ -53,17 +58,5 @@ Generates coverage files in different formats.
 2. Generate Istanbul json file:
 
    ```bash
-   dokimi covgen --reporter=istanbul --in=coverage.out --out=coverage.json
-   ```
-
-3. Use Istanbul CLI to generate HTML:
-
-   ```bash
-   istanbul report --include coverage.json --dir istanbul html
-   ```
-
-4. Open HTML:
-
-   ```bash
-   open istanbul/index.html
+   dokimi report --input=coverage.out --output=coverage.json --reporter=istanbul
    ```
