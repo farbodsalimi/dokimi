@@ -1,6 +1,8 @@
 # dokimi
 
-Dokimi is a Go testing framework.
+[![Go Report Card](https://goreportcard.com/badge/github.com/farbodsalimi/dokimi)](https://goreportcard.com/report/github.com/farbodsalimi/dokimi)
+
+Dokimi provides some helper commands for testing in Go.
 
 **Table of Contents**
 
