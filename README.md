@@ -1,5 +1,7 @@
 # dokimi
 
+[![Go](https://github.com/farbodsalimi/dokimi/actions/workflows/go.yml/badge.svg)](https://github.com/farbodsalimi/dokimi/actions/workflows/go.yml)
+[![Release](https://github.com/farbodsalimi/dokimi/actions/workflows/release.yml/badge.svg)](https://github.com/farbodsalimi/dokimi/actions/workflows/release.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/farbodsalimi/dokimi)](https://goreportcard.com/report/github.com/farbodsalimi/dokimi)
 
 Dokimi provides some helper commands for testing in Go.
