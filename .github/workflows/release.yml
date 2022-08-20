@@ -74,6 +74,9 @@ jobs:
           git tag -l
           git sv rn -t "${{ needs.tag.outputs.tag }}" > release-notes.md
 
+      - name: Install Task
+        uses: arduino/setup-task@v1
+
       - name: Build releases
         run: task release-all
 
