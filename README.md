@@ -3,6 +3,8 @@
 [![Go](https://github.com/farbodsalimi/dokimi/actions/workflows/go.yml/badge.svg)](https://github.com/farbodsalimi/dokimi/actions/workflows/go.yml)
 [![Release](https://github.com/farbodsalimi/dokimi/actions/workflows/release.yml/badge.svg)](https://github.com/farbodsalimi/dokimi/actions/workflows/release.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/farbodsalimi/dokimi)](https://goreportcard.com/report/github.com/farbodsalimi/dokimi)
+[![Maintainability](https://api.codeclimate.com/v1/badges/7c1b6f2aca67479f4220/maintainability)](https://codeclimate.com/github/farbodsalimi/dokimi/maintainability)
+[![Test Coverage](https://api.codeclimate.com/v1/badges/7c1b6f2aca67479f4220/test_coverage)](https://codeclimate.com/github/farbodsalimi/dokimi/test_coverage)
 
 Dokimi provides some helper commands for testing in Go.
 
