@@ -1,0 +1,19 @@
+version: "3"
+
+tasks:
+  test:
+    cmds:
+      - go test -v -coverprofile=coverage.out ./...
+
+  show-cover:
+    cmds:
+      - dokimi report --input=coverage.out --output=coverage.json --reporter=istanbul --show
+
+  build-all:
+    cmds:
+      - ./scripts/build-all.sh github.com/farbodsalimi/dokimi
+
+  default:
+    cmds:
+      - go build ./...
+    silent: true
