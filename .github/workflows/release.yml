@@ -78,7 +78,7 @@ jobs:
         uses: arduino/setup-task@v1
 
       - name: Build releases
-        run: task release-all
+        run: task build-all
 
       - name: Release
         uses: softprops/action-gh-release@v1
