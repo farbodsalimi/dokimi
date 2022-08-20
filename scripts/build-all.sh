@@ -20,14 +20,14 @@ version=$(git sv nv)
 
 for platform in "${platforms[@]}"
 do
-	platform_split=(${platform//\// })
-	platform_name=${platform_split[0]}
-	platform_arch=${platform_split[1]}
+  platform_split=(${platform//\// })
+  platform_name=${platform_split[0]}
+  platform_arch=${platform_split[1]}
 
-	output_path=bin/$package_name'_'$version'-'$platform_name'-'$platform_arch
-	if [ $platform_name = "windows" ]; then
-		output_path+='.exe'
-	fi
+  output_path=bin/$package_name'_'$version'-'$platform_name'-'$platform_arch
+  if [ $platform_name = "windows" ]; then
+    output_path+='.exe'
+  fi
 
   # compile
   env GOOS=$platform_name GOARCH=$platform_arch go build -ldflags="-X 'main.Version=v${version}'" -o $output_path $package
