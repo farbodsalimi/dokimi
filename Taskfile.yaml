@@ -9,6 +9,10 @@ tasks:
     cmds:
       - dokimi report --input=coverage.out --output=coverage.json --reporter=istanbul --show
 
+  build:
+    cmds:
+      - go build -o ./bin/dokimi github.com/farbodsalimi/dokimi
+
   build-all:
     cmds:
       - ./scripts/build-all.sh github.com/farbodsalimi/dokimi

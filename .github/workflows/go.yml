@@ -25,11 +25,11 @@ jobs:
       - name: Test
         run: go test -v
 
-      # - name: Coverage
-      #   uses: paambaati/codeclimate-action@v3.0.0
-      #   env:
-      #     CC_TEST_REPORTER_ID: abc
-      #   with:
-      #     prefix: github.com/farbodsalimi/dokimi
-      #     coverageCommand: go test -v --race -covermode=atomic -coverprofile=coverage.out ./...
-      #     coverageLocations: ${{github.workspace}}/coverage.out:gocov
+      - name: Coverage
+        uses: paambaati/codeclimate-action@v3.0.0
+        env:
+          CC_TEST_REPORTER_ID: 7442645f3d316d873958dd124e244c15cef0e7a11b1506f68932a04e472b58b5
+        with:
+          prefix: github.com/farbodsalimi/dokimi
+          coverageCommand: go test -v --race -covermode=atomic -coverprofile=coverage.out ./...
+          coverageLocations: ${{github.workspace}}/coverage.out:gocov

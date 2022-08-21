@@ -6,12 +6,13 @@ import (
 	log "github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 
-	"github.com/farbodsalimi/dokimi/internal/reporters"
+	istanbulReporter "github.com/farbodsalimi/dokimi/internal/reporters/istanbul"
 )
 
 func init() {
 	reportCmd.Flags().BoolVar(&show, "show", false, "Shows written reports")
-	reportCmd.Flags().StringVarP(&reporter, "reporter", "r", "", "Reporter name e.g. istanbul, lcov, ...")
+	reportCmd.Flags().
+		StringVarP(&reporter, "reporter", "r", "", "Reporter name e.g. istanbul, lcov, ...")
 	reportCmd.Flags().StringVarP(&rInput, "input", "i", "", "Path to input file")
 	reportCmd.Flags().StringVarP(&rOutput, "output", "o", "", "Path to output file")
 	reportCmd.MarkFlagRequired("reporter")
@@ -35,11 +36,17 @@ var (
 
 			switch reporter {
 			case "istanbul":
-				if show {
-					reporters.ShowIstanbulReports(rInput, rOutput)
-				} else {
-					reporters.WriteIstanbulReports(rInput, rOutput)
+				istanbul, err := istanbulReporter.New()
+				if err != nil {
+					log.Fatalln(err)
 				}
+
+				if show {
+					istanbul.ShowReport(rInput, rOutput)
+				} else {
+					istanbul.WriteReport(rInput, rOutput)
+				}
+
 			default:
 				log.Fatalf("Unknown reporter: %s", reporter)
 			}

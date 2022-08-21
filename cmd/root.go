@@ -29,9 +29,17 @@ func init() {
 }
 
 func initConfig() {
-	log.Println(configs.DokimiHomeDir)
 	if _, err := os.Stat(configs.DokimiHomeDir); errors.Is(err, os.ErrNotExist) {
-		err := os.Mkdir(configs.DokimiHomeDir, os.ModePerm)
+		log.Println("Creating", configs.DokimiHomeDir, "...")
+		err := os.MkdirAll(configs.DokimiHomeDir, os.ModePerm)
+		if err != nil {
+			log.Println(err)
+		}
+	}
+
+	if _, err := os.Stat(configs.IstanbulTmpDir); errors.Is(err, os.ErrNotExist) {
+		log.Println("Creating", configs.IstanbulTmpDir, "...")
+		err := os.MkdirAll(configs.IstanbulTmpDir, os.ModePerm)
 		if err != nil {
 			log.Println(err)
 		}

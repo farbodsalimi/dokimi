@@ -1,4 +1,4 @@
-package reporters
+package std
 
 import (
 	"bufio"
@@ -7,6 +7,8 @@ import (
 	"regexp"
 	"sort"
 	"strings"
+
+	"github.com/farbodsalimi/dokimi/internal/utils"
 )
 
 // ref: https://github.com/golang/go/blob/dev.boringcrypto.go1.8/src/cmd/cover/profile.go
@@ -49,12 +51,12 @@ func ParseProfiles(fileName string) ([]*Profile, error) {
 			files[fn] = p
 		}
 		p.Blocks = append(p.Blocks, ProfileBlock{
-			StartLine: toInt(m[2]),
-			StartCol:  toInt(m[3]),
-			EndLine:   toInt(m[4]),
-			EndCol:    toInt(m[5]),
-			NumStmt:   toInt(m[6]),
-			Count:     toInt(m[7]),
+			StartLine: utils.ToInt(m[2]),
+			StartCol:  utils.ToInt(m[3]),
+			EndLine:   utils.ToInt(m[4]),
+			EndCol:    utils.ToInt(m[5]),
+			NumStmt:   utils.ToInt(m[6]),
+			Count:     utils.ToInt(m[7]),
 		})
 	}
 	if err := s.Err(); err != nil {
@@ -72,7 +74,11 @@ func ParseProfiles(fileName string) ([]*Profile, error) {
 				b.EndLine == last.EndLine &&
 				b.EndCol == last.EndCol {
 				if b.NumStmt != last.NumStmt {
-					return nil, fmt.Errorf("inconsistent NumStmt: changed from %d to %d", last.NumStmt, b.NumStmt)
+					return nil, fmt.Errorf(
+						"inconsistent NumStmt: changed from %d to %d",
+						last.NumStmt,
+						b.NumStmt,
+					)
 				}
 				if mode == "set" {
 					p.Blocks[j-1].Count |= b.Count
