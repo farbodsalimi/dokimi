@@ -13,6 +13,7 @@ Dokimi provides some helper commands for testing in Go.
 - [dokimi](#dokimi)
   - [Installation](#installation)
   - [Commands](#commands)
+    - [check-coverage](#check-coverage)
     - [report](#report)
       - [Write Istanbul json reports and display them](#write-istanbul-json-reports-and-display-them)
       - [Only write Istanbul json reports](#only-write-istanbul-json-reports)
@@ -24,6 +25,12 @@ go install github.com/farbodsalimi/dokimi@latest
 ```
 
 ## Commands
+
+### check-coverage
+
+```bash
+dokimi check-coverage --threshold=90 --do-not-fail
+```
 
 ### report
 
