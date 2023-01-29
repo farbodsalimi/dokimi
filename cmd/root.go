@@ -14,8 +14,7 @@ var (
 	// Root Command
 	rootCmd = &cobra.Command{
 		Use:   "dokimi",
-		Short: "Dokimi is a Go testing framework.",
-		Long:  `Dokimi is a Go testing framework.`,
+		Short: "Dokimi provides some helper commands for testing in Go.",
 	}
 )
 
