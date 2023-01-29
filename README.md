@@ -28,6 +28,19 @@ go install github.com/farbodsalimi/dokimi@latest
 
 ### check-coverage
 
+```
+Usage:
+  dokimi check-coverage [flags]
+
+Flags:
+  -c, --coverprofile string   coverprofile (default "coverage.out")
+  -d, --do-not-fail           do-not-fail
+  -h, --help                  help for check-coverage
+  -t, --threshold float       threshold (default 100)
+```
+
+Example:
+
 ```bash
 dokimi check-coverage --threshold=90 --do-not-fail
 ```
