@@ -4,13 +4,12 @@ import (
 	"os"
 	"os/exec"
 
+	"github.com/farbodsalimi/dokimi/internal/configs"
 	"github.com/olekukonko/tablewriter"
 	log "github.com/sirupsen/logrus"
-
-	"github.com/farbodsalimi/dokimi/internal/configs"
 )
 
-func (istanbul *Istanbul) ShowReport(input string, output string) {
+func (istanbul *Istanbul) ShowReport(input string, output string) error {
 	//
 	istanbul.WriteReport(
 		input,
@@ -31,12 +30,14 @@ func (istanbul *Istanbul) ShowReport(input string, output string) {
 		table.Append([]string{"npm i -g istanbul"})
 		table.Render()
 
-		log.Fatal(err)
+		return err
 	}
 
 	exeCmd = exec.Command("open", configs.IstanbulTmpIndexPath)
 	err = exeCmd.Run()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
+
+	return nil
 }

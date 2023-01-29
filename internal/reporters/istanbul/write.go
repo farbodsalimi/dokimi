@@ -12,10 +12,10 @@ import (
 	"github.com/farbodsalimi/dokimi/internal/reporters/std"
 )
 
-func (istanbul *Istanbul) WriteReport(input string, output string) {
+func (istanbul *Istanbul) WriteReport(input string, output string) error {
 	wd, err := os.Getwd()
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	absoluteDir, projectFolder := path.Split(wd)
@@ -27,7 +27,7 @@ func (istanbul *Istanbul) WriteReport(input string, output string) {
 
 	profiles, err := std.ParseProfiles(input)
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	for _, p := range profiles {
@@ -63,12 +63,14 @@ func (istanbul *Istanbul) WriteReport(input string, output string) {
 
 	file, err := json.MarshalIndent(istanbulObject, "", " ")
 	if err != nil {
-		log.Fatal(err)
+		return err
 	}
 
 	err = istanbul.writeFile(output, file, 0644)
 	if err != nil {
 		fmt.Println(err)
-		log.Fatal(err)
+		return err
 	}
+
+	return nil
 }
