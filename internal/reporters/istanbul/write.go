@@ -9,7 +9,7 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/farbodsalimi/dokimi/internal/reporters/std"
+	"golang.org/x/tools/cover"
 )
 
 func (istanbul *Istanbul) WriteReport(input string, output string) error {
@@ -25,7 +25,7 @@ func (istanbul *Istanbul) WriteReport(input string, output string) error {
 
 	istanbulObject := map[string]IstanbulObject{}
 
-	profiles, err := std.ParseProfiles(input)
+	profiles, err := cover.ParseProfiles(input)
 	if err != nil {
 		return err
 	}
@@ -37,11 +37,11 @@ func (istanbul *Istanbul) WriteReport(input string, output string) error {
 		istanbulObj := IstanbulObject{
 			Path:         absolutePath,
 			StatementMap: map[string]IstanbulStatementMap{},
-			FnMap:        map[string]string{},
-			BranchMap:    map[string]string{},
+			FnMap:        map[string]IstanbulFnMapEntry{},
+			BranchMap:    map[string]IstanbulBranchMapEntry{},
 			S:            map[string]int{},
-			F:            map[string]string{},
-			B:            map[string]string{},
+			F:            map[string]int{},
+			B:            map[string][]int{},
 		}
 
 		for i, b := range p.Blocks {
@@ -49,7 +49,7 @@ func (istanbul *Istanbul) WriteReport(input string, output string) error {
 			istanbulObj.StatementMap[strconv.Itoa(i)] = IstanbulStatementMap{
 				Start: IstanbulStatementStartEnd{
 					Line:   b.StartLine,
-					Column: b.EndCol,
+					Column: b.StartCol,
 				},
 				End: IstanbulStatementStartEnd{
 					Line:   b.EndLine,
@@ -66,7 +66,7 @@ func (istanbul *Istanbul) WriteReport(input string, output string) error {
 		return err
 	}
 
-	err = istanbul.writeFile(output, file, 0644)
+	err = istanbul.WriteFile(output, file, 0644)
 	if err != nil {
 		fmt.Println(err)
 		return err
