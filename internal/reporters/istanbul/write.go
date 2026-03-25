@@ -37,11 +37,11 @@ func (istanbul *Istanbul) WriteReport(input string, output string) error {
 		istanbulObj := IstanbulObject{
 			Path:         absolutePath,
 			StatementMap: map[string]IstanbulStatementMap{},
-			FnMap:        map[string]string{},
-			BranchMap:    map[string]string{},
+			FnMap:        map[string]IstanbulFnMapEntry{},
+			BranchMap:    map[string]IstanbulBranchMapEntry{},
 			S:            map[string]int{},
-			F:            map[string]string{},
-			B:            map[string]string{},
+			F:            map[string]int{},
+			B:            map[string][]int{},
 		}
 
 		for i, b := range p.Blocks {
