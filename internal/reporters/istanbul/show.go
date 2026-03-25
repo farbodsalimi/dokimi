@@ -1,6 +1,7 @@
 package istanbul
 
 import (
+	"fmt"
 	"os"
 	"os/exec"
 
@@ -10,21 +11,24 @@ import (
 )
 
 func (istanbul *Istanbul) ShowReport(input string, output string) error {
-	//
-	istanbul.WriteReport(
+	err := istanbul.WriteReport(
 		input,
 		configs.IstanbulTmpJsonPath,
 	)
+	if err != nil {
+		return err
+	}
 
-	//
 	exeCmd := exec.Command("istanbul", "report",
 		"--include", configs.IstanbulTmpJsonPath,
 		"--dir", configs.IstanbulTmpDir, "html",
 	)
 
-	err := exeCmd.Run()
+	cmdOutput, err := exeCmd.CombinedOutput()
 	if err != nil {
-		log.Errorln("Please make sure you have istanbul globally installed on your local machine")
+		log.WithError(err).WithField("output", string(cmdOutput)).
+			Error("failed to run 'istanbul report'")
+		log.Info("if istanbul is not installed, run: npm i -g istanbul")
 
 		table := tablewriter.NewWriter(os.Stdout)
 		table.Append([]string{"npm i -g istanbul"})
@@ -36,7 +40,7 @@ func (istanbul *Istanbul) ShowReport(input string, output string) error {
 	exeCmd = exec.Command("open", configs.IstanbulTmpIndexPath)
 	err = exeCmd.Run()
 	if err != nil {
-		return err
+		return fmt.Errorf("failed to open report at %s: %w", configs.IstanbulTmpIndexPath, err)
 	}
 
 	return nil

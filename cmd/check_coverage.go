@@ -22,14 +22,20 @@ func NewCheckCoverageCmd() *cobra.Command {
 		RunE: func(cmd *cobra.Command, args []string) error {
 			result, err := exec.Command("go", "tool", "cover", "-func", coverProfile).Output()
 			if err != nil {
-				return err
+				return fmt.Errorf("failed to run 'go tool cover' on %s: %w", coverProfile, err)
 			}
 
 			content := string(result)
 			index := strings.Index(content, "total")
+			if index == -1 {
+				return fmt.Errorf("could not find total coverage in %s", coverProfile)
+			}
 			line := content[index:]
 			re := regexp.MustCompile(`([0-9]*\.?[0-9]*)\s*%`)
 			match := re.FindStringSubmatch(line)
+			if match == nil {
+				return fmt.Errorf("could not parse coverage percentage from %s", coverProfile)
+			}
 			totalCoverage, err := strconv.ParseFloat(match[1], 32)
 			if err != nil {
 				return err
@@ -44,7 +50,7 @@ func NewCheckCoverageCmd() *cobra.Command {
 				if doNotFail {
 					log.Warn(msg)
 				} else {
-					log.Fatalf(msg)
+					return fmt.Errorf("%s", msg)
 				}
 			}
 

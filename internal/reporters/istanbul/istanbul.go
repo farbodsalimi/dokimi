@@ -2,8 +2,30 @@ package istanbul
 
 import (
 	"io/fs"
-	"io/ioutil"
+	"os"
+
 )
+
+type Istanbul struct {
+	writeFileFn func(filename string, data []byte, perm fs.FileMode) error
+}
+
+func (i Istanbul) WriteFile(filename string, data []byte, perm fs.FileMode) error {
+	writeFn := i.writeFileFn
+	if writeFn == nil {
+		writeFn = os.WriteFile
+	}
+	return writeFn(filename, data, perm)
+}
+
+func New(opts ...func(*Istanbul)) (*Istanbul, error) {
+	istanbul := &Istanbul{}
+	for _, opt := range opts {
+		opt(istanbul)
+	}
+
+	return istanbul, nil
+}
 
 type IstanbulStatementStartEnd struct {
 	Line   int `json:"line"`
@@ -18,26 +40,9 @@ type IstanbulStatementMap struct {
 type IstanbulObject struct {
 	Path         string                          `json:"path"`
 	StatementMap map[string]IstanbulStatementMap `json:"statementMap"`
-	FnMap        interface{}                     `json:"fnMap"`
-	BranchMap    interface{}                     `json:"branchMap"`
+	FnMap        any                             `json:"fnMap"`
+	BranchMap    any                             `json:"branchMap"`
 	S            map[string]int                  `json:"s"`
-	F            interface{}                     `json:"f"`
-	B            interface{}                     `json:"b"`
-}
-
-type Istanbul struct {
-	writeFile func(filename string, data []byte, perm fs.FileMode) error
-}
-
-func New(opts ...func(*Istanbul)) (*Istanbul, error) {
-	istanbul := &Istanbul{}
-	for _, opt := range opts {
-		opt(istanbul)
-	}
-
-	if istanbul.writeFile == nil {
-		istanbul.writeFile = ioutil.WriteFile
-	}
-
-	return istanbul, nil
+	F            any                             `json:"f"`
+	B            any                             `json:"b"`
 }

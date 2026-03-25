@@ -18,7 +18,7 @@ var (
 func init() {
 	home, err := homedir.Dir()
 	if err != nil {
-		log.Fatal(err)
+		log.Fatalf("failed to determine home directory: %v", err)
 	}
 
 	DokimiHomeDir = path.Join(home, ".dokimi")
